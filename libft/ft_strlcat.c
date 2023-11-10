@@ -17,20 +17,22 @@ size_t	ft_strlcat(char *dest, const char *src, size_t n)
 	size_t	j;
 	size_t	i;
 	size_t	k;
+	size_t	len;
 
 	k = ft_strlen(src) + n;
 	if (n != 0)
 	{
 		j = ft_strlen(dest);
 		i = 0;
-		if (k >= ft_strlen(src) + j)
-			k = (k - n) + j;
-		while (j + i < (n - 1))
+		len = ft_strlen(src) + j;
+		if (k >= len || k < ft_strlen(src))
+			k = len;
+		while (j + i <= len && j + i < (n - 1))
 		{
 			dest[j + i] = src[i];
 			i++;
 		}
-		if (n > j)
+		if ((j + i) > j)
 			dest[j + i] = '\0';
 	}
 	return (k);

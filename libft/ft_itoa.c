@@ -38,6 +38,8 @@ char	*ft_itoa(int n)
 	int		sg;
 	char	*rsl;
 
+	if (n == -2147483648)
+		return (ft_strdup("-2147483648"));
 	sg = ft_sg(n);
 	if (n < 0)
 		n *= -1;
@@ -45,18 +47,13 @@ char	*ft_itoa(int n)
 	rsl = ft_calloc(i-- + 1, sizeof(char));
 	if (!rsl)
 		return (0);
-	if (n != -2147483648)
+	while (n > 9)
 	{
-		while (n > 9)
-		{
-			rsl[i--] = (n % 10) + '0';
-			n /= 10;
-		}
-		rsl[i] = n + '0';
-		if (sg == 1)
-			rsl[i - 1] = '-';
+		rsl[i--] = (n % 10) + '0';
+		n /= 10;
 	}
-	else
-		rsl = ft_strdup("-2147483648");
+	rsl[i] = n + '0';
+	if (sg == 1)
+		rsl[i - 1] = '-';
 	return (rsl);
 }

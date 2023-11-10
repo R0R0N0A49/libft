@@ -17,6 +17,8 @@ char	*ft_memchr(const void *s, int c, size_t n)
 	long unsigned int	i;
 	const char			*src;
 
+	if (c > 255)
+		c -= 256;
 	src = s;
 	i = 0;
 	while (i < n)

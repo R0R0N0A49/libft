@@ -16,6 +16,8 @@ char	*ft_strrchr(const char *s, int c)
 {
 	int	i;
 
+	if (c > 255)
+		c -= 256;
 	i = ft_strlen(s);
 	if (c == '\0')
 		return ((char *)(s + i));

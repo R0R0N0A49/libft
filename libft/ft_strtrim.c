@@ -18,7 +18,7 @@ char	*ft_strtrim(const char *s1, const char *set)
 	size_t			y;
 	char			*rsl;
 
-	if (!s1 || !set)
+	if (!s1)
 		return (0);
 	i = 0;
 	y = ft_strlen((char *)s1);
@@ -29,6 +29,5 @@ char	*ft_strtrim(const char *s1, const char *set)
 	rsl = ft_substr(s1, i, (y - i) + 1);
 	if (!rsl)
 		return (0);
-	rsl[y - i + 1] = '\0';
 	return (rsl);
 }

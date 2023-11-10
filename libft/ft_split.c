@@ -17,15 +17,17 @@ static int	ft_count(char const *s, char c)
 	int		j;
 	int		i;
 
-	if (!s)
-		return (0);
 	i = 0;
+	j = 0;
+	if (!s[i])
+		return (0);
 	if (s[i] == c)
 	{
-		j = 0;
+		if (s[ft_strlen(s) - 1] != c)
+			j = 1;
 		i++;
 	}
-	else
+	else if (s[ft_strlen(s) - 1] != c)
 		j = 1;
 	while (s[i])
 	{
@@ -34,13 +36,6 @@ static int	ft_count(char const *s, char c)
 		i++;
 	}
 	return (j);
-}
-
-static int	ft_separator(char s, char c)
-{
-	if (s == c)
-		return (1);
-	return (0);
 }
 
 size_t	ft_lenword(const char *s, char chr)
@@ -64,12 +59,25 @@ static char	*ft_strdup_mod(const char *s, char chr)
 	rsl = (char *)ft_calloc((len_s + 1), sizeof(char));
 	if (rsl == 0)
 		return (0);
-	while (s[i] && !ft_separator(s[i], chr))
+	while (s[i] && s[i] != chr)
 	{
 		rsl[i] = s[i];
 		i++;
 	}
 	return (rsl);
+}
+
+void	ft_free(char **tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i])
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
 }
 
 char	**ft_split(char const *s, char c)
@@ -78,22 +86,21 @@ char	**ft_split(char const *s, char c)
 	int		j;
 	char	**tab;
 
-	if (!s)
-		return (0);
 	i = 0;
 	j = 0;
+	if (!s)
+		return (0);
 	tab = ft_calloc((ft_count(s, c) + 1), sizeof(char *));
 	if (!tab)
 		return (0);
 	while (s[i])
 	{
-		if (s[i] && ft_separator(s[i], c))
+		while (s[i] && s[i] == c)
 			i++;
-		if (s[i] && !ft_separator(s[i], c))
+		if (s[i] && s[i] != c)
 		{
-			tab[j] = ft_strdup_mod(&s[i], c);
-			j++;
-			while (s[i] && !ft_separator(s[i], c))
+			tab[j++] = ft_strdup_mod(&s[i], c);
+			while (s[i] && s[i] != c)
 				i++;
 		}
 	}
