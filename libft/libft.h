@@ -14,6 +14,7 @@
 # define LIBFT_H
 # include <stdlib.h>
 # include <unistd.h>
+# include "get_next_line.h"
 
 char	*ft_substr(const char *s, unsigned int start, size_t len);
 int		ft_isalpha(int argv);
