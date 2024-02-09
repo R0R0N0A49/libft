@@ -40,7 +40,7 @@ int	ft_strlen_gnl(char *src)
 	return (i);
 }
 
-char	*ft_strjoin(char *buf, char *result, int t)
+static char	*ft_strjoin(char *buf, char *result, int t)
 {
 	char	*tmp;
 	int		i;
